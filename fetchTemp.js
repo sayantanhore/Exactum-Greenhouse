@@ -36,11 +36,11 @@ serialPort.on("open", function(){
                 
                 if(data.toString() === LISTENING.toString()){
                     console.log("Message from Arduino :: " + "Listening");
-                    /*
+                    
                     serialPort.write(temperature.toString() + "p", function(err, results){
                         console.log("Temperature data sent");
                     });
-                    */
+                    
                 }
                 else if(data.toString() === TEMPERATURE_RECEIVED.toString()){
                     console.log("Message from Arduino :: " + "Temperature received");
@@ -50,17 +50,20 @@ serialPort.on("open", function(){
 
 function fetchJson(){
 	console.log("Starting");
-    
+    /*
 	https.get(url, function(res){
 		
 		res.on("data", function(data){
-            console.log(data.toString());
+            console.log(data.toString().substring(0, (parseInt(data.toString().length) - 0)));
 			try{
+                console.log("Data Length");
+                console.log(data.toString().length);
                 console.log(JSON.parse(data.toString()));
             }
             catch(e){
                 if(e instanceof SyntaxError){
                     console.log(e.stack);
+                    data = eval(data.toString() + "\"");
                 }
                 else{
                     throw e;
@@ -70,7 +73,7 @@ function fetchJson(){
 		})
 
 	})
-    
+    */
     fs.readFile(file, 'utf8', function(err, data){
         if(err){
             console.log("Error!");
@@ -85,12 +88,7 @@ function fetchJson(){
             if(temp < 40){
                 temperature = temp;
             }
-        }
-        
-        
-        
-        
-        
+        }  
     });
 }
 
